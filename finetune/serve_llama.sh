@@ -15,11 +15,12 @@ conda activate agent
 
 
 
-MODEL_DIR="/home/tianyueo/agent/fine_tune/output_5k"
+MODEL_DIR="/home/tianyueo/agent/fine_tune/output_5k/pytorch_model.bin"
 test -d "$MODEL_DIR"
 python -O -u -m vllm.entrypoints.openai.api_server \
     --port=1528 \
-    --model="$MODEL_DIR" \
+    --model=/home/tianyueo/agent/fine_tune/output_5k/ \
+    --tokenizer=hf-internal-testing/llama-tokenizer \
     --tensor-parallel-size=1 \
     --max-num-batched-tokens=4096
 
